@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,6 +112,16 @@ select{background:var(--panel2);color:var(--text);border:1px solid var(--line);b
 .modal h2{color:var(--gold2)}
 .modal p{line-height:1.8}
 .toast{position:fixed;bottom:22px;right:22px;background:var(--panel2);border:1px solid var(--gold);padding:12px 18px;border-radius:9px;font-size:12px;display:none;z-index:20}
+.quest-card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.quest-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.quest-reward{color:var(--gold2);font-size:12px;font-weight:800}
+.quest-status{font-size:10px;color:var(--muted);letter-spacing:1px}
+.quest-card.completed{border-color:var(--green)}
+.quest-card.claimed{opacity:.75}
+.quest-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.coin-panel{display:flex;align-items:center;justify-content:space-between;gap:15px;background:linear-gradient(130deg,#29364d,#192234 80%);border:1px solid #756344;border-radius:15px;padding:22px;margin-bottom:18px}
+.coin-total{font-size:30px;color:var(--gold2);font-weight:800}
+.quest-progress{font-size:11px;color:var(--muted)}
 body.light{--bg:#f2eee5;--panel:#fffdf8;--panel2:#eee8db;--text:#272c34;--muted:#747b84;--line:#ddd5c5}
 body.light .sidebar{background:#e9e2d4}
 body.light .nav-btn.active,body.light .nav-btn:hover{background:#dcd3c0}
@@ -127,6 +136,7 @@ body.light .board{background:#8d806b;border-color:#8d806b}
 .sidebar{width:190px}.main{padding:25px 22px}
 .game-layout{grid-template-columns:1fr}
 .game-layout>div:first-child{max-width:570px;width:100%;margin:auto}
+.quest-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:650px){
 .app{display:block;padding-bottom:70px}
@@ -146,6 +156,8 @@ body.light .board{background:#8d806b;border-color:#8d806b}
 .difficulty-grid{grid-template-columns:repeat(2,1fr)}
 .setting-row{gap:8px}
 .setting-row select{max-width:145px}
+.quest-grid{grid-template-columns:1fr}
+.coin-panel{align-items:flex-start;flex-direction:column}
 }
 </style>
 </head>
@@ -159,18 +171,17 @@ body.light .board{background:#8d806b;border-color:#8d806b}
 <div class="nav-label">MAIN MENU</div>
 <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
 <button class="nav-btn" data-page="play"><span class="nav-icon">▦</span>Play Sudoku</button>
+<button class="nav-btn" data-page="quests"><span class="nav-icon">♛</span>Daily Quests</button>
 <button class="nav-btn" data-page="progress"><span class="nav-icon">◷</span>Progress</button>
 <div class="nav-label" style="margin-top:28px">PREFERENCES</div>
 <button class="nav-btn" data-page="settings"><span class="nav-icon">⚙</span>Settings</button>
-<div class="sidebar-bottom">♛ SUDOKU ROYALE<br>Think clearly. Play royally.<br><br>Version 1.0</div>
+<div class="sidebar-bottom">♛ SUDOKU ROYALE<br>Think clearly. Play royally.<br><br>Version 1.1</div>
 </aside>
-
 <main class="main">
 <div class="topbar">
 <div class="page-name" id="pageTitle">Dashboard</div>
 <div class="player-tag">♛ &nbsp; ROYAL PLAYER</div>
 </div>
-
 <section class="screen active" id="dashboard">
 <div class="hero">
 <div class="eyebrow">WELCOME TO THE ROYALE</div>
@@ -205,8 +216,8 @@ body.light .board{background:#8d806b;border-color:#8d806b}
 <div class="stat"><strong id="homeBest">--:--</strong><span>BEST TIME</span></div>
 </div>
 <div class="card daily">
-<div><div class="card-label">YOUR DAILY TRADITION</div><h3 style="margin:8px 0">A new day. A new puzzle.</h3><p style="margin:0">Keep your mind sharp with a fresh challenge.</p></div>
-<button class="btn gold" onclick="dailyChallenge()">Daily Challenge ♛</button>
+<div><div class="card-label">YOUR DAILY TRADITION</div><h3 style="margin:8px 0">A new day. A new puzzle.</h3><p style="margin:0">Complete daily missions and earn Royale Coins.</p></div>
+<button class="btn gold" onclick="navigate('quests')">View Daily Quests ♛</button>
 </div>
 </section>
 
@@ -225,7 +236,6 @@ body.light .board{background:#8d806b;border-color:#8d806b}
 <button class="btn" id="savedContinue" onclick="continueGame()" disabled>Continue Saved Game →</button>
 </div>
 </div>
-
 <div id="gameArea" style="display:none">
 <div class="game-head">
 <div><div class="eyebrow">YOUR ROYAL CHALLENGE</div><h2 id="gameLevel">Easy Sudoku</h2><p style="margin:4px 0">Fill every row, column, and 3 × 3 box.</p></div>
@@ -264,6 +274,55 @@ body.light .board{background:#8d806b;border-color:#8d806b}
 <p style="margin:0">Every row, column, and 3 × 3 box must contain the numbers 1 to 9 without repetition.</p>
 </div>
 </div>
+</div>
+</div>
+</section>
+
+<section class="screen" id="quests">
+<div class="section-head">
+<div class="eyebrow">YOUR DAILY MISSIONS</div>
+<h1>Daily Quests.</h1>
+<p>Complete missions, claim rewards, and build your royal fortune.</p>
+</div>
+<div class="coin-panel">
+<div>
+<div class="card-label">YOUR ROYALE BALANCE</div>
+<div class="coin-total">♛ <span id="coinBalance">0</span> Coins</div>
+<p style="margin:5px 0 0">Earn coins by completing daily quests.</p>
+</div>
+<div>
+<div class="card-label">TODAY'S PROGRESS</div>
+<h2 id="questProgressText" style="margin:8px 0">0 / 3 Completed</h2>
+<div class="quest-progress">Your missions refresh every day.</div>
+</div>
+</div>
+<div class="quest-grid">
+<div class="quest-card" id="questDailyCard">
+<div class="quest-top"><span class="card-label">QUEST 01</span><span class="quest-reward">+50 COINS</span></div>
+<h3>Royal Daily Puzzle</h3>
+<p>Complete today's special Medium Sudoku puzzle to prove your royal skills.</p>
+<div class="progress-bar"><div id="questDailyBar"></div></div>
+<div class="quest-status" id="questDailyStatus">NOT STARTED</div>
+<button class="btn gold" id="dailyPuzzleBtn" onclick="startDailyPuzzle()">Start Daily Puzzle →</button>
+<button class="btn" id="claimDailyBtn" onclick="claimQuest('daily')" disabled>Claim Reward</button>
+</div>
+<div class="quest-card" id="questFlawlessCard">
+<div class="quest-top"><span class="card-label">QUEST 02</span><span class="quest-reward">+50 COINS</span></div>
+<h3>Flawless Solver</h3>
+<p>Complete any Sudoku puzzle with zero mistakes. Precision is the key to victory.</p>
+<div class="progress-bar"><div id="questFlawlessBar"></div></div>
+<div class="quest-status" id="questFlawlessStatus">NOT STARTED</div>
+<button class="btn" onclick="navigate('play')">Play Sudoku →</button>
+<button class="btn" id="claimFlawlessBtn" onclick="claimQuest('flawless')" disabled>Claim Reward</button>
+</div>
+<div class="quest-card" id="questLogicCard">
+<div class="quest-top"><span class="card-label">QUEST 03</span><span class="quest-reward">+50 COINS</span></div>
+<h3>Pure Logic</h3>
+<p>Win a Sudoku puzzle without using any hints. Trust your own reasoning.</p>
+<div class="progress-bar"><div id="questLogicBar"></div></div>
+<div class="quest-status" id="questLogicStatus">NOT STARTED</div>
+<button class="btn" onclick="navigate('play')">Play Sudoku →</button>
+<button class="btn" id="claimLogicBtn" onclick="claimQuest('logic')" disabled>Claim Reward</button>
 </div>
 </div>
 </section>
@@ -364,12 +423,11 @@ body.light .board{background:#8d806b;border-color:#8d806b}
 </div>
 </div>
 <div class="toast" id="toast"></div>
-
 <script>
 const $=id=>document.getElementById(id);
 const LEVELS=['Beginner','Easy','Medium','Hard','Expert','Master'];
 const REMOVALS={Beginner:30,Easy:36,Medium:45,Hard:51,Expert:55,Master:59};
-const SAVE='royaleGame',SETTINGS='royaleSettings',STATS='royaleProgress';
+const SAVE='royaleGame',SETTINGS='royaleSettings',STATS='royaleProgress',QUESTS='royaleDailyQuests';
 
 let settings=JSON.parse(localStorage.getItem(SETTINGS)||'null')||{
 difficulty:'Easy',mistakes:3,autoCheck:true,noteAssist:true,
@@ -378,52 +436,178 @@ hintsEnabled:true,theme:'dark',showTimer:true
 let stats=JSON.parse(localStorage.getItem(STATS)||'null')||{
 played:0,won:0,best:null,history:[]
 };
+
 let difficulty=settings.difficulty;
 let solution=[],original=[],board=[],selected=null;
 let notes={},history=[],mistakes=0,hints=3,seconds=0;
 let notesMode=false,gameActive=false,timerInterval=null;
+let dailyMode=false,hintsUsed=0,wrongEntries=0;
+let questData=loadQuestData();
 
-function saveSettings(){localStorage.setItem(SETTINGS,JSON.stringify(settings))}
+function todayKey(){
+const d=new Date();
+return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+function loadQuestData(){
+let data;
+try{data=JSON.parse(localStorage.getItem(QUESTS)||'null')}catch(e){data=null}
+if(!data||typeof data!=='object')data={coins:0};
+if(data.date!==todayKey()){
+data={date:todayKey(),coins:Number(data.coins)||0,completed:{},claimed:{}};
+}
+data.coins=Number(data.coins)||0;
+data.completed=data.completed||{};
+data.claimed=data.claimed||{};
+return data;
+}
+
+function saveQuestData(){
+questData.date=todayKey();
+localStorage.setItem(QUESTS,JSON.stringify(questData));
+}
+
+function refreshDailyQuests(){
+questData=loadQuestData();
+
+const completedCount=['daily','flawless','logic']
+.filter(id=>questData.completed[id]).length;
+
+$('coinBalance').textContent=questData.coins;
+$('questProgressText').textContent=completedCount+' / 3 Completed';
+
+$('questDailyBar').style.width=(questData.completed.daily?100:0)+'%';
+$('questFlawlessBar').style.width=(questData.completed.flawless?100:0)+'%';
+$('questLogicBar').style.width=(questData.completed.logic?100:0)+'%';
+
+updateQuestCard('daily','questDailyCard','questDailyStatus','claimDailyBtn');
+updateQuestCard('flawless','questFlawlessCard','questFlawlessStatus','claimFlawlessBtn');
+updateQuestCard('logic','questLogicCard','questLogicStatus','claimLogicBtn');
+
+$('dailyPuzzleBtn').disabled=!!questData.completed.daily;
+$('dailyPuzzleBtn').textContent=questData.completed.daily?
+'Daily Puzzle Completed ✓':'Start Daily Puzzle →';
+}
+
+function updateQuestCard(id,cardId,statusId,buttonId){
+const done=!!questData.completed[id];
+const claimed=!!questData.claimed[id];
+
+$(cardId).classList.toggle('completed',done);
+$(cardId).classList.toggle('claimed',claimed);
+
+$(statusId).textContent=claimed?'REWARD CLAIMED ✓':
+done?'COMPLETED — REWARD READY':'NOT COMPLETED';
+
+$(buttonId).disabled=!done||claimed;
+$(buttonId).textContent=claimed?'Reward Claimed ✓':
+done?'Claim 50 Coins':'Claim Reward';
+}
+
+function claimQuest(id){
+questData=loadQuestData();
+
+if(!['daily','flawless','logic'].includes(id))return;
+if(!questData.completed[id]||questData.claimed[id])return;
+
+questData.claimed[id]=true;
+questData.coins+=50;
+
+saveQuestData();
+refreshDailyQuests();
+notify('50 Royale Coins added to your treasury!');
+}
+
+function startDailyPuzzle(){
+questData=loadQuestData();
+
+if(questData.completed.daily){
+notify('You have already completed today’s Daily Puzzle.');
+return;
+}
+
+difficulty='Medium';
+startNewGame(true);
+$('gameMessage').textContent='Royal Daily Puzzle started. Good luck!';
+}
+
+function dailyChallenge(){
+navigate('quests');
+}
+
+function saveSettings(){
+localStorage.setItem(SETTINGS,JSON.stringify(settings));
+}
+
 function saveStats(){
 localStorage.setItem(STATS,JSON.stringify(stats));
 updateProgress();
 }
+
 function notify(message){
 $('toast').textContent=message;
 $('toast').style.display='block';
 setTimeout(()=>$('toast').style.display='none',2200);
 }
+
 function formatTime(t){
 return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
 }
 
 function navigate(page){
 if(page!=='play'&&gameActive)saveGame();
+
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 $(page).classList.add('active');
-document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
-$('pageTitle').textContent={dashboard:'Dashboard',play:'Play Sudoku',progress:'Progress',settings:'Settings'}[page];
+
+document.querySelectorAll('.nav-btn').forEach(b=>
+b.classList.toggle('active',b.dataset.page===page)
+);
+
+$('pageTitle').textContent={
+dashboard:'Dashboard',
+play:'Play Sudoku',
+progress:'Progress',
+quests:'Daily Quests',
+settings:'Settings'
+}[page];
+
 if(page==='dashboard')updateDashboard();
 if(page==='progress')updateProgress();
+if(page==='quests')refreshDailyQuests();
 if(page==='settings')loadSettings();
 if(page==='play')updatePlayMenu();
+
 window.scrollTo({top:0,behavior:'smooth'});
 }
-document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
+
+document.querySelectorAll('.nav-btn').forEach(b=>
+b.addEventListener('click',()=>navigate(b.dataset.page))
+);
 
 function buildDifficultyButtons(){
 ['quickDifficulties','playDifficulties'].forEach(id=>{
 $(id).innerHTML='';
+
 LEVELS.forEach(level=>{
 const b=document.createElement('button');
 b.className='diff-btn'+(level===difficulty?' active':'');
-b.innerHTML=level+'<small>'+({Beginner:'Relaxed',Easy:'Casual',Medium:'Balanced',Hard:'Advanced',Expert:'Masterful',Master:'Extreme'}[level])+'</small>';
+b.innerHTML=level+'<small>'+({
+Beginner:'Relaxed',
+Easy:'Casual',
+Medium:'Balanced',
+Hard:'Advanced',
+Expert:'Masterful',
+Master:'Extreme'
+}[level])+'</small>';
+
 b.onclick=()=>{
 difficulty=level;
 document.querySelectorAll('.diff-btn').forEach(x=>{
 x.classList.toggle('active',x.textContent.startsWith(level));
 });
 };
+
 $(id).appendChild(b);
 });
 });
@@ -434,56 +618,91 @@ $('defaultDifficulty').innerHTML=LEVELS.map(l=>'<option>'+l+'</option>').join(''
 $('defaultDifficulty').value=settings.difficulty;
 $('mistakeLimit').value=String(settings.mistakes);
 $('themeSelect').value=settings.theme;
+
 ['autoCheck','noteAssist','hintsEnabled','showTimer'].forEach(k=>{
 $(k).classList.toggle('on',settings[k]);
 });
 }
+
 function changeSetting(key,value){
 settings[key]=key==='mistakes'?Number(value):value;
+
 if(key==='difficulty')difficulty=value;
+
 saveSettings();
 document.body.classList.toggle('light',settings.theme==='light');
 notify('Settings updated.');
 }
+
 function toggleSetting(key){
 settings[key]=!settings[key];
-saveSettings();loadSettings();
+saveSettings();
+loadSettings();
 notify('Preference updated.');
 }
 
 function updateDashboard(){
 $('homePlayed').textContent=stats.played;
 $('homeWon').textContent=stats.won;
-$('homeRate').textContent=stats.played?Math.round(stats.won/stats.played*100)+'%':'0%';
+$('homeRate').textContent=stats.played?
+Math.round(stats.won/stats.played*100)+'%':'0%';
 $('homeBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
+
 const saved=localStorage.getItem(SAVE);
 $('continueBtn').disabled=!saved;
 $('continueBtn').textContent=saved?'Continue Game →':'No Saved Game';
-$('dashContinueTitle').textContent=saved?'Your game is waiting.':'Ready for a challenge?';
-$('dashContinueText').textContent=saved?'Resume your saved puzzle right where you left off.':'Choose a level and begin your royal journey.';
+$('dashContinueTitle').textContent=saved?
+'Your game is waiting.':'Ready for a challenge?';
+$('dashContinueText').textContent=saved?
+'Resume your saved puzzle right where you left off.':
+'Choose a level and begin your royal journey.';
 }
+
 function updatePlayMenu(){
 const saved=localStorage.getItem(SAVE);
-$('savedTitle').textContent=saved?'A puzzle is waiting for you.':'No active puzzle';
-$('savedDescription').textContent=saved?'Your '+JSON.parse(saved).difficulty+' puzzle is saved.':'Start a new challenge to begin your journey.';
+
+$('savedTitle').textContent=saved?
+'A puzzle is waiting for you.':'No active puzzle';
+
+$('savedDescription').textContent=saved?
+'Your '+JSON.parse(saved).difficulty+' puzzle is saved.':
+'Start a new challenge to begin your journey.';
+
 $('savedContinue').disabled=!saved;
 $('playMenu').style.display='block';
 $('gameArea').style.display='none';
+
 buildDifficultyButtons();
 }
+
 function updateProgress(){
-const rate=stats.played?Math.round(stats.won/stats.played*100):0;
+const rate=stats.played?
+Math.round(stats.won/stats.played*100):0;
+
 $('progPlayed').textContent=stats.played;
 $('progWon').textContent=stats.won;
 $('progRate').textContent=rate+'%';
 $('progBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
+
 $('progressRateText').textContent=rate+'% Completed';
 $('progressBar').style.width=rate+'%';
-$('recordText').textContent=stats.best===null?'Your journey begins.':formatTime(stats.best);
-$('recordDescription').textContent=stats.best===null?'Complete a puzzle to set your first record.':'Your fastest completed puzzle.';
-$('historyBody').innerHTML=stats.history.length?stats.history.slice(0,12).map(g=>
-'<tr><td>'+g.date+'</td><td>'+g.level+'</td><td>'+formatTime(g.time)+'</td><td style="color:'+(g.won?'var(--green)':'var(--red)')+'">'+(g.won?'Victory':'Unfinished')+'</td></tr>'
-).join(''):'<tr><td colspan="4" class="empty">No games played yet.</td></tr>';
+
+$('recordText').textContent=stats.best===null?
+'Your journey begins.':formatTime(stats.best);
+
+$('recordDescription').textContent=stats.best===null?
+'Complete a puzzle to set your first record.':
+'Your fastest completed puzzle.';
+
+$('historyBody').innerHTML=stats.history.length?
+stats.history.slice(0,12).map(g=>
+'<tr><td>'+g.date+'</td><td>'+g.level+'</td><td>'+
+formatTime(g.time)+'</td><td style="color:'+
+(g.won?'var(--green)':'var(--red)')+'">'+
+(g.won?'Victory':'Unfinished')+'</td></tr>'
+).join(''):
+'<tr><td colspan="4" class="empty">No games played yet.</td></tr>';
+
 $('homePlayed').textContent=stats.played;
 $('homeWon').textContent=stats.won;
 $('homeRate').textContent=rate+'%';
@@ -497,14 +716,27 @@ const j=Math.floor(Math.random()*(i+1));
 }
 return a;
 }
+
 function valid(g,r,c,n){
-for(let i=0;i<9;i++)if(g[r][i]===n||g[i][c]===n)return false;
-let br=Math.floor(r/3)*3,bc=Math.floor(c/3)*3;
-for(let i=br;i<br+3;i++)for(let j=bc;j<bc+3;j++)if(g[i][j]===n)return false;
+for(let i=0;i<9;i++){
+if(g[r][i]===n||g[i][c]===n)return false;
+}
+
+let br=Math.floor(r/3)*3;
+let bc=Math.floor(c/3)*3;
+
+for(let i=br;i<br+3;i++){
+for(let j=bc;j<bc+3;j++){
+if(g[i][j]===n)return false;
+}
+}
 return true;
 }
+
 function fillGrid(g){
-for(let r=0;r<9;r++)for(let c=0;c<9;c++)if(!g[r][c]){
+for(let r=0;r<9;r++){
+for(let c=0;c<9;c++){
+if(!g[r][c]){
 for(const n of shuffle([1,2,3,4,5,6,7,8,9])){
 if(valid(g,r,c,n)){
 g[r][c]=n;
@@ -514,120 +746,197 @@ g[r][c]=0;
 }
 return false;
 }
+}
+}
 return true;
 }
+
 function makePuzzle(){
 const g=Array.from({length:9},()=>Array(9).fill(0));
 fillGrid(g);
+
 solution=g.map(row=>[...row]);
 original=g.map(row=>[...row]);
+
 const positions=shuffle(Array.from({length:81},(_,i)=>i));
+
 for(let i=0;i<REMOVALS[difficulty];i++){
 const p=positions[i];
 original[Math.floor(p/9)][p%9]=0;
 }
+
 board=original.map(row=>[...row]);
 }
 
-/* FIXED: Start Playing now opens the Play screen and displays the board. */
-function startNewGame(){
+function startNewGame(isDaily=false){
 clearInterval(timerInterval);
+
 if(!LEVELS.includes(difficulty))difficulty=settings.difficulty;
+
+dailyMode=!!isDaily;
+hintsUsed=0;
+wrongEntries=0;
+
 makePuzzle();
-selected=null;notes={};history=[];mistakes=0;hints=3;seconds=0;
-notesMode=false;gameActive=true;
+
+selected=null;
+notes={};
+history=[];
+mistakes=0;
+hints=3;
+seconds=0;
+notesMode=false;
+gameActive=true;
+
 stats.played++;
 saveStats();
+
 navigate('play');
 openGame();
 saveGame();
 }
 
-/* FIXED: Daily Challenge starts a Medium puzzle and opens the game. */
-function dailyChallenge(){
-difficulty='Medium';
-startNewGame();
-$('gameMessage').textContent='Daily Challenge started! Good luck!';
-}
-
 function openGame(){
 $('playMenu').style.display='none';
 $('gameArea').style.display='block';
-$('gameLevel').textContent=difficulty+' Sudoku';
+
+$('gameLevel').textContent=(dailyMode?'Royal Daily · ':'')+
+difficulty+' Sudoku';
+
 $('notesBtn').textContent='✎ Notes OFF';
 $('notesBtn').classList.remove('active');
+
 $('timer').parentElement.style.display=settings.showTimer?'block':'none';
-renderBoard();renderNumbers();updateGameStats();
+
+renderBoard();
+renderNumbers();
+updateGameStats();
+
 $('gameMessage').textContent='Select a cell to begin.';
 startTimer();
 }
+
 function startTimer(){
 clearInterval(timerInterval);
+
 timerInterval=setInterval(()=>{
-if(gameActive){seconds++;updateGameStats();saveGame();}
+if(gameActive){
+seconds++;
+updateGameStats();
+saveGame();
+}
 },1000);
 }
+
 function updateGameStats(){
 $('timer').textContent=formatTime(seconds);
 $('mistakes').textContent=mistakes+' / '+(settings.mistakes||'∞');
 $('hintCount').textContent=settings.hintsEnabled?hints:'OFF';
 }
+
 function renderBoard(){
-const el=$('board');el.innerHTML='';
-for(let r=0;r<9;r++)for(let c=0;c<9;c++){
-const value=board[r][c],cell=document.createElement('button');
+const el=$('board');
+el.innerHTML='';
+
+for(let r=0;r<9;r++){
+for(let c=0;c<9;c++){
+const value=board[r][c];
+const cell=document.createElement('button');
+
 cell.className='cell';
+
 if(original[r][c])cell.classList.add('given');
 if(r===2||r===5)cell.classList.add('box-bottom');
+
 if(selected){
 const [sr,sc]=selected;
-if(sr===r||sc===c||(Math.floor(sr/3)===Math.floor(r/3)&&Math.floor(sc/3)===Math.floor(c/3)))cell.classList.add('related');
+
+if(sr===r||sc===c||
+(Math.floor(sr/3)===Math.floor(r/3)&&
+Math.floor(sc/3)===Math.floor(c/3))){
+cell.classList.add('related');
+}
+
 if(sr===r&&sc===c)cell.classList.add('selected');
 if(value&&value===board[sr][sc])cell.classList.add('same');
 }
-if(value)cell.textContent=value;
-else if(notes[r*9+c]?.size&&settings.noteAssist){
-const ng=document.createElement('div');ng.className='notes-grid';
+
+if(value){
+cell.textContent=value;
+}else if(notes[r*9+c]?.size&&settings.noteAssist){
+const ng=document.createElement('div');
+ng.className='notes-grid';
+
 for(let n=1;n<=9;n++){
 const s=document.createElement('span');
 s.textContent=notes[r*9+c].has(n)?n:'';
 ng.appendChild(s);
 }
+
 cell.appendChild(ng);
 }
+
 cell.onclick=()=>selectCell(r,c);
 el.appendChild(cell);
 }
 }
+}
+
 function renderNumbers(){
 $('numberPad').innerHTML='';
+
 for(let n=1;n<=9;n++){
 const b=document.createElement('button');
-b.className='num-btn';b.textContent=n;
+b.className='num-btn';
+b.textContent=n;
 b.onclick=()=>enterNumber(n);
 $('numberPad').appendChild(b);
 }
 }
+
 function selectCell(r,c){
-selected=[r,c];renderBoard();
-$('gameMessage').textContent=original[r][c]?'Fixed number.':`Row ${r+1}, column ${c+1}.`;
+selected=[r,c];
+renderBoard();
+
+$('gameMessage').textContent=original[r][c]?
+'Fixed number.':`Row ${r+1}, column ${c+1}.`;
 }
+
 function enterNumber(n){
 if(!gameActive||!selected){
 $('gameMessage').textContent='Select a cell first.';
 return;
 }
-const [r,c]=selected,key=r*9+c;
-if(original[r][c]){notify('That number is fixed.');return;}
+
+const [r,c]=selected;
+const key=r*9+c;
+
+if(original[r][c]){
+notify('That number is fixed.');
+return;
+}
+
 if(notesMode){
 if(!notes[key])notes[key]=new Set();
-notes[key].has(n)?notes[key].delete(n):notes[key].add(n);
-renderBoard();saveGame();return;
+
+notes[key].has(n)?
+notes[key].delete(n):notes[key].add(n);
+
+renderBoard();
+saveGame();
+return;
 }
+
 if(board[r][c]===n)return;
+
 history.push({r,c,old:board[r][c]});
-board[r][c]=n;delete notes[key];
+board[r][c]=n;
+delete notes[key];
+
 const wrong=n!==solution[r][c];
+
+if(wrong)wrongEntries++;
+
 if(wrong&&settings.autoCheck){
 mistakes++;
 $('gameMessage').textContent='Incorrect entry. Try again!';
@@ -636,125 +945,255 @@ $('gameMessage').style.color='var(--red)';
 $('gameMessage').textContent='Number entered.';
 $('gameMessage').style.color='var(--green)';
 }
-updateGameStats();renderBoard();saveGame();
+
+updateGameStats();
+renderBoard();
+saveGame();
+
 if(settings.mistakes&&mistakes>=settings.mistakes){
 finishGame(false,'You reached the mistake limit. Try another puzzle!');
 return;
 }
-if(isSolved())finishGame(true,'You conquered the grid in '+formatTime(seconds)+'!');
+
+if(isSolved()){
+finishGame(true,'You conquered the grid in '+formatTime(seconds)+'!');
 }
+}
+
 function toggleNotes(){
 notesMode=!notesMode;
+
 $('notesBtn').textContent=notesMode?'✎ Notes ON':'✎ Notes OFF';
 $('notesBtn').classList.toggle('active',notesMode);
-$('gameMessage').textContent=notesMode?'Pencil mode enabled.':'Pencil mode disabled.';
+
+$('gameMessage').textContent=notesMode?
+'Pencil mode enabled.':'Pencil mode disabled.';
 }
+
 function eraseCell(){
 if(!selected)return;
+
 const [r,c]=selected;
 if(original[r][c])return;
+
 history.push({r,c,old:board[r][c]});
-board[r][c]=0;delete notes[r*9+c];
-renderBoard();saveGame();
+board[r][c]=0;
+delete notes[r*9+c];
+
+renderBoard();
+saveGame();
 }
+
 function useHint(){
-if(!settings.hintsEnabled){notify('Hints are disabled in Settings.');return;}
-if(!selected||hints<=0){notify('Select an empty cell and check your hints.');return;}
+if(!settings.hintsEnabled){
+notify('Hints are disabled in Settings.');
+return;
+}
+
+if(!selected||hints<=0){
+notify('Select an empty cell and check your hints.');
+return;
+}
+
 const [r,c]=selected;
-if(original[r][c]||board[r][c]){notify('Select an empty cell.');return;}
+
+if(original[r][c]||board[r][c]){
+notify('Select an empty cell.');
+return;
+}
+
 history.push({r,c,old:0});
-board[r][c]=solution[r][c];hints--;
-updateGameStats();renderBoard();saveGame();
+board[r][c]=solution[r][c];
+hints--;
+hintsUsed++;
+
+updateGameStats();
+renderBoard();
+saveGame();
+
 if(isSolved())finishGame(true,'You conquered the grid!');
 }
+
 function undoMove(){
-if(!history.length){notify('Nothing to undo.');return;}
+if(!history.length){
+notify('Nothing to undo.');
+return;
+}
+
 const m=history.pop();
 board[m.r][m.c]=m.old;
 selected=[m.r,m.c];
-renderBoard();saveGame();
+
+renderBoard();
+saveGame();
 }
+
 function checkBoard(){
 let wrong=0,empty=0;
-for(let r=0;r<9;r++)for(let c=0;c<9;c++){
+
+for(let r=0;r<9;r++){
+for(let c=0;c<9;c++){
 if(!board[r][c])empty++;
 else if(board[r][c]!==solution[r][c])wrong++;
 }
-$('gameMessage').textContent=wrong+' incorrect entries · '+empty+' empty cells.';
+}
+
+$('gameMessage').textContent=
+wrong+' incorrect entries · '+empty+' empty cells.';
+
 $('gameMessage').style.color=wrong?'var(--red)':'var(--green)';
 }
+
 function isSolved(){
-return board.every((row,r)=>row.every((n,c)=>n===solution[r][c]));
+return board.every((row,r)=>
+row.every((n,c)=>n===solution[r][c])
+);
 }
+
 function saveGame(){
 if(!gameActive)return;
+
 localStorage.setItem(SAVE,JSON.stringify({
-solution,original,board,difficulty,seconds,mistakes,hints,history,
-notes:Object.fromEntries(Object.entries(notes).map(([k,v])=>[k,[...v]]))
+solution,original,board,difficulty,seconds,mistakes,hints,
+history,dailyMode,hintsUsed,wrongEntries,
+notes:Object.fromEntries(
+Object.entries(notes).map(([k,v])=>[k,[...v]])
+)
 }));
+
 updateDashboard();
 }
+
 function continueGame(){
 try{
 const d=JSON.parse(localStorage.getItem(SAVE));
-if(!d){notify('No saved game found.');return;}
-solution=d.solution;original=d.original;board=d.board;
-difficulty=d.difficulty;seconds=d.seconds;mistakes=d.mistakes;
-hints=d.hints;history=d.history||[];
-notes=Object.fromEntries(Object.entries(d.notes||{}).map(([k,v])=>[k,new Set(v)]));
-selected=null;notesMode=false;gameActive=true;
+
+if(!d){
+notify('No saved game found.');
+return;
+}
+
+solution=d.solution;
+original=d.original;
+board=d.board;
+difficulty=d.difficulty;
+seconds=d.seconds;
+mistakes=d.mistakes;
+hints=d.hints;
+history=d.history||[];
+
+dailyMode=!!d.dailyMode;
+hintsUsed=Number(d.hintsUsed)||0;
+wrongEntries=Number(d.wrongEntries)||0;
+
+notes=Object.fromEntries(
+Object.entries(d.notes||{}).map(([k,v])=>[k,new Set(v)])
+);
+
+selected=null;
+notesMode=false;
+gameActive=true;
+
 navigate('play');
 openGame();
-}catch(e){notify('Unable to load saved game.');}
+
+}catch(e){
+notify('Unable to load saved game.');
 }
+}
+
 function finishGame(won,message){
-gameActive=false;clearInterval(timerInterval);
+gameActive=false;
+clearInterval(timerInterval);
+
+if(won){
+questData=loadQuestData();
+
+if(dailyMode)questData.completed.daily=true;
+if(wrongEntries===0)questData.completed.flawless=true;
+if(hintsUsed===0)questData.completed.logic=true;
+
+saveQuestData();
+refreshDailyQuests();
+}
+
 stats.history.unshift({
 date:new Date().toLocaleDateString(),
-level:difficulty,time:seconds,won
+level:difficulty,
+time:seconds,
+won
 });
+
 if(stats.history.length>30)stats.history.pop();
+
 if(won){
 stats.won++;
-if(stats.best===null||seconds<stats.best)stats.best=seconds;
-localStorage.removeItem(SAVE);
-}else{
-localStorage.removeItem(SAVE);
+
+if(stats.best===null||seconds<stats.best){
+stats.best=seconds;
 }
+}
+
+localStorage.removeItem(SAVE);
 saveStats();
+
 $('modalTitle').textContent=won?'Royal Victory!':'Challenge Ended';
 $('modalText').textContent=message;
 $('modal').style.display='flex';
 }
+
 function closeModal(){
 $('modal').style.display='none';
 navigate('dashboard');
 }
+
 function restartGame(){
 if(!confirm('Restart this puzzle?'))return;
+
 board=original.map(row=>[...row]);
-mistakes=0;hints=3;seconds=0;history=[];notes={};selected=null;
-gameActive=true;updateGameStats();renderBoard();startTimer();saveGame();
+mistakes=0;
+hints=3;
+seconds=0;
+hintsUsed=0;
+wrongEntries=0;
+history=[];
+notes={};
+selected=null;
+
+gameActive=true;
+updateGameStats();
+renderBoard();
+startTimer();
+saveGame();
+
 $('gameMessage').textContent='Puzzle restarted.';
 }
+
 function backToPlay(){
-saveGame();clearInterval(timerInterval);
+saveGame();
+clearInterval(timerInterval);
 gameActive=false;
 navigate('play');
 }
+
 function resetStatistics(){
 if(!confirm('Clear all your game statistics and history?'))return;
+
 stats={played:0,won:0,best:null,history:[]};
-saveStats();notify('Progress has been reset.');
+saveStats();
+notify('Progress has been reset.');
 }
 
 document.addEventListener('keydown',e=>{
 if(!gameActive)return;
+
 if(e.key>='1'&&e.key<='9')enterNumber(Number(e.key));
 if(e.key==='Backspace'||e.key==='Delete')eraseCell();
 if(e.key.toLowerCase()==='n')toggleNotes();
+
 if(selected){
 const [r,c]=selected;
+
 if(e.key==='ArrowUp')selectCell(Math.max(0,r-1),c);
 if(e.key==='ArrowDown')selectCell(Math.min(8,r+1),c);
 if(e.key==='ArrowLeft')selectCell(r,Math.max(0,c-1));
@@ -767,6 +1206,7 @@ buildDifficultyButtons();
 loadSettings();
 updateDashboard();
 updateProgress();
+refreshDailyQuests();
 </script>
 </body>
 </html>
