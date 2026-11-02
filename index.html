@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,31 +9,22 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
 
 :root{
-  --bg:#101522;--panel:#192234;--panel2:#222e43;
-  --gold:#d9b66b;--gold2:#f0d99e;--text:#f6f3eb;
-  --muted:#9ca9ba;--line:#354156;--green:#75b99b;
-  --red:#e28b8b;
+--bg:#101522;--panel:#192234;--panel2:#222e43;
+--gold:#d9b66b;--gold2:#f0d99e;--text:#f6f3eb;
+--muted:#9ca9ba;--line:#354156;--green:#75b99b;--red:#e28b8b;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif}
 button,select{font:inherit;cursor:pointer}
 button:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .app{display:flex;min-height:100vh}
-.sidebar{
-  width:245px;flex-shrink:0;background:#151d2c;
-  border-right:1px solid var(--line);padding:28px 18px;
-  display:flex;flex-direction:column;
-}
+.sidebar{width:245px;flex-shrink:0;background:#151d2c;border-right:1px solid var(--line);padding:28px 18px;display:flex;flex-direction:column}
 .brand{display:flex;align-items:center;gap:12px;padding:0 8px 35px}
 .brand-icon{width:43px;height:43px;border:1px solid var(--gold);border-radius:11px;display:grid;place-items:center;color:var(--gold);font-size:25px}
 .brand-name{font-family:'Playfair Display',serif;font-size:19px;letter-spacing:1px}
 .brand-sub{font-size:9px;letter-spacing:3px;color:var(--gold);margin-top:3px}
 .nav-label{font-size:10px;color:#748198;letter-spacing:2px;padding:0 12px;margin:10px 0}
-.nav-btn{
-  width:100%;border:0;background:transparent;color:var(--muted);
-  text-align:left;padding:13px 14px;border-radius:9px;margin:3px 0;
-  font-size:13px;display:flex;gap:13px;align-items:center;
-}
+.nav-btn{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:13px 14px;border-radius:9px;margin:3px 0;font-size:13px;display:flex;gap:13px;align-items:center}
 .nav-btn:hover,.nav-btn.active{background:#303b50;color:var(--gold2)}
 .nav-btn.active{border-left:3px solid var(--gold)}
 .nav-icon{font-size:18px;width:22px;text-align:center}
@@ -123,10 +113,7 @@ select{background:var(--panel2);color:var(--text);border:1px solid var(--line);b
 .modal h2{color:var(--gold2)}
 .modal p{line-height:1.8}
 .toast{position:fixed;bottom:22px;right:22px;background:var(--panel2);border:1px solid var(--gold);padding:12px 18px;border-radius:9px;font-size:12px;display:none;z-index:20}
-body.light{
-  --bg:#f2eee5;--panel:#fffdf8;--panel2:#eee8db;
-  --text:#272c34;--muted:#747b84;--line:#ddd5c5;
-}
+body.light{--bg:#f2eee5;--panel:#fffdf8;--panel2:#eee8db;--text:#272c34;--muted:#747b84;--line:#ddd5c5}
 body.light .sidebar{background:#e9e2d4}
 body.light .nav-btn.active,body.light .nav-btn:hover{background:#dcd3c0}
 body.light .featured{background:linear-gradient(130deg,#e9dfc9,#fffdf8)}
@@ -136,250 +123,245 @@ body.light .cell.related{background:#e0dccf}
 body.light .cell.selected{background:#c4a76b!important;color:#fff}
 body.light .cell.same{background:#d5c9aa}
 body.light .board{background:#8d806b;border-color:#8d806b}
-body.light .num-btn{background:#eee8db}
-body.light .side-card{background:#fffdf8}
 @media(max-width:850px){
- .sidebar{width:190px}.main{padding:25px 22px}
- .game-layout{grid-template-columns:1fr}
- .game-layout>div:first-child{max-width:570px;width:100%;margin:auto}
+.sidebar{width:190px}.main{padding:25px 22px}
+.game-layout{grid-template-columns:1fr}
+.game-layout>div:first-child{max-width:570px;width:100%;margin:auto}
 }
 @media(max-width:650px){
- .app{display:block;padding-bottom:70px}
- .sidebar{position:fixed;bottom:0;left:0;right:0;width:100%;height:65px;padding:5px 8px;z-index:5;display:flex;flex-direction:row;justify-content:space-around;border-right:0;border-top:1px solid var(--line)}
- .brand,.nav-label,.sidebar-bottom{display:none}
- .nav-btn{flex-direction:column;justify-content:center;gap:2px;padding:5px;margin:0;font-size:9px;width:auto;flex:1;text-align:center}
- .nav-icon{font-size:18px}
- .main{padding:20px 14px 35px}
- .topbar{margin-bottom:20px}
- .grid{grid-template-columns:1fr}
- .stats{grid-template-columns:repeat(2,1fr)}
- .daily{align-items:flex-start;flex-direction:column}
- .game-head{align-items:flex-start;flex-direction:column}
- .game-stats{width:100%}.game-stat{flex:1}
- .cell{font-size:clamp(14px,4vw,22px)}
- .board-wrap{padding:5px}
- .difficulty-grid{grid-template-columns:repeat(2,1fr)}
- .setting-row{gap:8px}
- .setting-row select{max-width:145px}
+.app{display:block;padding-bottom:70px}
+.sidebar{position:fixed;bottom:0;left:0;right:0;width:100%;height:65px;padding:5px 8px;z-index:5;display:flex;flex-direction:row;justify-content:space-around;border-right:0;border-top:1px solid var(--line)}
+.brand,.nav-label,.sidebar-bottom{display:none}
+.nav-btn{flex-direction:column;justify-content:center;gap:2px;padding:5px;margin:0;font-size:9px;width:auto;flex:1;text-align:center}
+.nav-icon{font-size:18px}
+.main{padding:20px 14px 35px}
+.topbar{margin-bottom:20px}
+.grid{grid-template-columns:1fr}
+.stats{grid-template-columns:repeat(2,1fr)}
+.daily{align-items:flex-start;flex-direction:column}
+.game-head{align-items:flex-start;flex-direction:column}
+.game-stats{width:100%}.game-stat{flex:1}
+.cell{font-size:clamp(14px,4vw,22px)}
+.board-wrap{padding:5px}
+.difficulty-grid{grid-template-columns:repeat(2,1fr)}
+.setting-row{gap:8px}
+.setting-row select{max-width:145px}
 }
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="sidebar">
-  <div class="brand">
-    <div class="brand-icon">♛</div>
-    <div><div class="brand-name">SUDOKU ROYALE</div><div class="brand-sub">THE ROYAL PUZZLE</div></div>
-  </div>
-  <div class="nav-label">MAIN MENU</div>
-  <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
-  <button class="nav-btn" data-page="play"><span class="nav-icon">▦</span>Play Sudoku</button>
-  <button class="nav-btn" data-page="progress"><span class="nav-icon">◷</span>Progress</button>
-  <div class="nav-label" style="margin-top:28px">PREFERENCES</div>
-  <button class="nav-btn" data-page="settings"><span class="nav-icon">⚙</span>Settings</button>
-  <div class="sidebar-bottom">♛ SUDOKU ROYALE<br>Think clearly. Play royally.<br><br>Version 1.0</div>
+<div class="brand">
+<div class="brand-icon">♛</div>
+<div><div class="brand-name">SUDOKU ROYALE</div><div class="brand-sub">THE ROYAL PUZZLE</div></div>
+</div>
+<div class="nav-label">MAIN MENU</div>
+<button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
+<button class="nav-btn" data-page="play"><span class="nav-icon">▦</span>Play Sudoku</button>
+<button class="nav-btn" data-page="progress"><span class="nav-icon">◷</span>Progress</button>
+<div class="nav-label" style="margin-top:28px">PREFERENCES</div>
+<button class="nav-btn" data-page="settings"><span class="nav-icon">⚙</span>Settings</button>
+<div class="sidebar-bottom">♛ SUDOKU ROYALE<br>Think clearly. Play royally.<br><br>Version 1.0</div>
 </aside>
 
 <main class="main">
-  <div class="topbar">
-    <div class="page-name" id="pageTitle">Dashboard</div>
-    <div class="player-tag">♛ &nbsp; ROYAL PLAYER</div>
-  </div>
+<div class="topbar">
+<div class="page-name" id="pageTitle">Dashboard</div>
+<div class="player-tag">♛ &nbsp; ROYAL PLAYER</div>
+</div>
 
-  <!-- DASHBOARD -->
-  <section class="screen active" id="dashboard">
-    <div class="hero">
-      <div class="eyebrow">WELCOME TO THE ROYALE</div>
-      <h1>Master the Grid.</h1>
-      <p>A world of numbers, logic, and strategy awaits.<br>Take your time. Trust your mind. Conquer the grid.</p>
-      <div class="hero-rule"></div>
-    </div>
-    <div class="grid">
-      <div class="card featured">
-        <div>
-          <div class="card-label">YOUR CURRENT CHALLENGE</div>
-          <h2 id="dashContinueTitle">Ready for a challenge?</h2>
-          <p id="dashContinueText">Your next great puzzle is waiting.</p>
-        </div>
-        <div class="actions">
-          <button class="btn gold" id="continueBtn" onclick="continueGame()">Continue Game →</button>
-          <button class="btn" onclick="navigate('play')">New Game</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-label">QUICK START</div>
-        <h2>Choose your level.</h2>
-        <p>Select your preferred challenge and start playing.</p>
-        <div class="difficulty-grid" id="quickDifficulties"></div>
-        <button class="btn gold" style="width:100%" onclick="startNewGame()">Start Playing →</button>
-      </div>
-    </div>
-    <div class="stats">
-      <div class="stat"><strong id="homePlayed">0</strong><span>GAMES PLAYED</span></div>
-      <div class="stat"><strong id="homeWon">0</strong><span>PUZZLES SOLVED</span></div>
-      <div class="stat"><strong id="homeRate">0%</strong><span>WIN RATE</span></div>
-      <div class="stat"><strong id="homeBest">--:--</strong><span>BEST TIME</span></div>
-    </div>
-    <div class="card daily">
-      <div><div class="card-label">YOUR DAILY TRADITION</div><h3 style="margin:8px 0">A new day. A new puzzle.</h3><p style="margin:0">Keep your mind sharp with a fresh challenge.</p></div>
-      <button class="btn gold" onclick="dailyChallenge()">Daily Challenge ♛</button>
-    </div>
-  </section>
+<section class="screen active" id="dashboard">
+<div class="hero">
+<div class="eyebrow">WELCOME TO THE ROYALE</div>
+<h1>Master the Grid.</h1>
+<p>A world of numbers, logic, and strategy awaits.<br>Take your time. Trust your mind. Conquer the grid.</p>
+<div class="hero-rule"></div>
+</div>
+<div class="grid">
+<div class="card featured">
+<div>
+<div class="card-label">YOUR CURRENT CHALLENGE</div>
+<h2 id="dashContinueTitle">Ready for a challenge?</h2>
+<p id="dashContinueText">Your next great puzzle is waiting.</p>
+</div>
+<div class="actions">
+<button class="btn gold" id="continueBtn" onclick="continueGame()">Continue Game →</button>
+<button class="btn" onclick="navigate('play')">New Game</button>
+</div>
+</div>
+<div class="card">
+<div class="card-label">QUICK START</div>
+<h2>Choose your level.</h2>
+<p>Select your preferred challenge and start playing.</p>
+<div class="difficulty-grid" id="quickDifficulties"></div>
+<button class="btn gold" style="width:100%" onclick="startNewGame()">Start Playing →</button>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><strong id="homePlayed">0</strong><span>GAMES PLAYED</span></div>
+<div class="stat"><strong id="homeWon">0</strong><span>PUZZLES SOLVED</span></div>
+<div class="stat"><strong id="homeRate">0%</strong><span>WIN RATE</span></div>
+<div class="stat"><strong id="homeBest">--:--</strong><span>BEST TIME</span></div>
+</div>
+<div class="card daily">
+<div><div class="card-label">YOUR DAILY TRADITION</div><h3 style="margin:8px 0">A new day. A new puzzle.</h3><p style="margin:0">Keep your mind sharp with a fresh challenge.</p></div>
+<button class="btn gold" onclick="dailyChallenge()">Daily Challenge ♛</button>
+</div>
+</section>
 
-  <!-- PLAY -->
-  <section class="screen" id="play">
-    <div id="playMenu">
-      <div class="section-head"><div class="eyebrow">THE CHALLENGE</div><h1>Choose your battle.</h1><p>Pick a difficulty and test your logical thinking.</p></div>
-      <div class="card">
-        <h2>Difficulty Selection</h2>
-        <div class="difficulty-grid" id="playDifficulties"></div>
-        <button class="btn gold" onclick="startNewGame()">Begin Challenge →</button>
-      </div>
-      <div class="card" style="margin-top:18px">
-        <div class="card-label">SAVED GAME</div>
-        <h3 style="margin-top:10px" id="savedTitle">No active puzzle</h3>
-        <p id="savedDescription">Start a new challenge to begin your journey.</p>
-        <button class="btn" id="savedContinue" onclick="continueGame()" disabled>Continue Saved Game →</button>
-      </div>
-    </div>
-    <div id="gameArea" style="display:none">
-      <div class="game-head">
-        <div><div class="eyebrow">YOUR ROYAL CHALLENGE</div><h2 id="gameLevel">Easy Sudoku</h2><p style="margin:4px 0">Fill every row, column, and 3 × 3 box.</p></div>
-        <div class="game-stats">
-          <div class="game-stat"><span>TIME</span><strong id="timer">00:00</strong></div>
-          <div class="game-stat"><span>MISTAKES</span><strong id="mistakes">0 / 3</strong></div>
-          <div class="game-stat"><span>HINTS</span><strong id="hintCount">3</strong></div>
-        </div>
-      </div>
-      <div class="game-layout">
-        <div>
-          <div class="board-wrap"><div class="board" id="board"></div></div>
-          <div class="game-actions">
-            <button class="btn" onclick="backToPlay()">← Back</button>
-            <button class="btn" onclick="restartGame()">↻ Restart</button>
-            <button class="btn" onclick="checkBoard()">✓ Check</button>
-          </div>
-        </div>
-        <div class="side-panel">
-          <div class="card">
-            <h3>Number Pad</h3>
-            <div class="number-pad" id="numberPad"></div>
-          </div>
-          <div class="card">
-            <h3>Game Tools</h3>
-            <div class="tool-grid">
-              <button class="tool-btn" id="notesBtn" onclick="toggleNotes()">✎ Notes OFF</button>
-              <button class="tool-btn" onclick="eraseCell()">⌫ Erase</button>
-              <button class="tool-btn" onclick="useHint()">✧ Hint</button>
-              <button class="tool-btn" onclick="undoMove()">↶ Undo</button>
-            </div>
-            <div class="message" id="gameMessage">Select a cell to begin.</div>
-          </div>
-          <div class="card">
-            <h3>Royal Rules</h3>
-            <p style="margin:0">Every row, column, and 3 × 3 box must contain the numbers 1 to 9 without repetition.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="screen" id="play">
+<div id="playMenu">
+<div class="section-head"><div class="eyebrow">THE CHALLENGE</div><h1>Choose your battle.</h1><p>Pick a difficulty and test your logical thinking.</p></div>
+<div class="card">
+<h2>Difficulty Selection</h2>
+<div class="difficulty-grid" id="playDifficulties"></div>
+<button class="btn gold" onclick="startNewGame()">Begin Challenge →</button>
+</div>
+<div class="card" style="margin-top:18px">
+<div class="card-label">SAVED GAME</div>
+<h3 style="margin-top:10px" id="savedTitle">No active puzzle</h3>
+<p id="savedDescription">Start a new challenge to begin your journey.</p>
+<button class="btn" id="savedContinue" onclick="continueGame()" disabled>Continue Saved Game →</button>
+</div>
+</div>
 
-  <!-- PROGRESS -->
-  <section class="screen" id="progress">
-    <div class="section-head"><div class="eyebrow">YOUR JOURNEY</div><h1>Player Progress.</h1><p>Every puzzle makes you sharper. Track your achievements here.</p></div>
-    <div class="stats">
-      <div class="stat"><strong id="progPlayed">0</strong><span>GAMES PLAYED</span></div>
-      <div class="stat"><strong id="progWon">0</strong><span>GAMES WON</span></div>
-      <div class="stat"><strong id="progRate">0%</strong><span>WIN RATE</span></div>
-      <div class="stat"><strong id="progBest">--:--</strong><span>BEST TIME</span></div>
-    </div>
-    <div class="grid" style="margin-top:18px">
-      <div class="card">
-        <div class="card-label">COMPLETION RATE</div>
-        <h2 id="progressRateText">0% Completed</h2>
-        <div class="progress-bar"><div id="progressBar"></div></div>
-        <p>Percentage of started games that you successfully completed.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">PERSONAL RECORD</div>
-        <h2 id="recordText">Your journey begins.</h2>
-        <p id="recordDescription">Complete a puzzle to set your first record.</p>
-      </div>
-    </div>
-    <div class="card" style="margin-top:18px;overflow-x:auto">
-      <div class="card-label">GAME HISTORY</div>
-      <h2 style="margin-top:8px">Recent Challenges</h2>
-      <table class="history-table">
-        <thead><tr><th>DATE</th><th>LEVEL</th><th>TIME</th><th>RESULT</th></tr></thead>
-        <tbody id="historyBody"><tr><td colspan="4" class="empty">No games played yet.</td></tr></tbody>
-      </table>
-    </div>
-  </section>
+<div id="gameArea" style="display:none">
+<div class="game-head">
+<div><div class="eyebrow">YOUR ROYAL CHALLENGE</div><h2 id="gameLevel">Easy Sudoku</h2><p style="margin:4px 0">Fill every row, column, and 3 × 3 box.</p></div>
+<div class="game-stats">
+<div class="game-stat"><span>TIME</span><strong id="timer">00:00</strong></div>
+<div class="game-stat"><span>MISTAKES</span><strong id="mistakes">0 / 3</strong></div>
+<div class="game-stat"><span>HINTS</span><strong id="hintCount">3</strong></div>
+</div>
+</div>
+<div class="game-layout">
+<div>
+<div class="board-wrap"><div class="board" id="board"></div></div>
+<div class="game-actions">
+<button class="btn" onclick="backToPlay()">← Back</button>
+<button class="btn" onclick="restartGame()">↻ Restart</button>
+<button class="btn" onclick="checkBoard()">✓ Check</button>
+</div>
+</div>
+<div class="side-panel">
+<div class="card">
+<h3>Number Pad</h3>
+<div class="number-pad" id="numberPad"></div>
+</div>
+<div class="card">
+<h3>Game Tools</h3>
+<div class="tool-grid">
+<button class="tool-btn" id="notesBtn" onclick="toggleNotes()">✎ Notes OFF</button>
+<button class="tool-btn" onclick="eraseCell()">⌫ Erase</button>
+<button class="tool-btn" onclick="useHint()">✧ Hint</button>
+<button class="tool-btn" onclick="undoMove()">↶ Undo</button>
+</div>
+<div class="message" id="gameMessage">Select a cell to begin.</div>
+</div>
+<div class="card">
+<h3>Royal Rules</h3>
+<p style="margin:0">Every row, column, and 3 × 3 box must contain the numbers 1 to 9 without repetition.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-  <!-- SETTINGS -->
-  <section class="screen" id="settings">
-    <div class="section-head"><div class="eyebrow">MAKE IT YOURS</div><h1>Game Settings.</h1><p>Customize your Sudoku Royale experience.</p></div>
-    <div class="card" style="margin-bottom:17px">
-      <div class="card-label">GAMEPLAY PREFERENCES</div>
-      <div class="setting-row">
-        <div><strong>Default Difficulty</strong><p>Choose the level used when starting a new puzzle.</p></div>
-        <select id="defaultDifficulty" onchange="changeSetting('difficulty',this.value)"></select>
-      </div>
-      <div class="setting-row">
-        <div><strong>Mistake Limit</strong><p>How many incorrect entries are allowed?</p></div>
-        <select id="mistakeLimit" onchange="changeSetting('mistakes',this.value)">
-          <option value="3">3 Mistakes</option><option value="5">5 Mistakes</option><option value="0">Unlimited</option>
-        </select>
-      </div>
-      <div class="setting-row">
-        <div><strong>Auto-check Answers</strong><p>Highlight incorrect entries immediately.</p></div>
-        <button class="toggle on" id="autoCheck" onclick="toggleSetting('autoCheck')"></button>
-      </div>
-      <div class="setting-row">
-        <div><strong>Notes Assistance</strong><p>Show pencil marks in empty cells.</p></div>
-        <button class="toggle on" id="noteAssist" onclick="toggleSetting('noteAssist')"></button>
-      </div>
-      <div class="setting-row">
-        <div><strong>Enable Hints</strong><p>Allow hints during gameplay.</p></div>
-        <button class="toggle on" id="hintsEnabled" onclick="toggleSetting('hintsEnabled')"></button>
-      </div>
-    </div>
-    <div class="card" style="margin-bottom:17px">
-      <div class="card-label">APPEARANCE & DISPLAY</div>
-      <div class="setting-row">
-        <div><strong>Theme</strong><p>Choose your preferred appearance.</p></div>
-        <select id="themeSelect" onchange="changeSetting('theme',this.value)">
-          <option value="dark">Dark Navy & Gold</option>
-          <option value="light">Light Ivory & Gold</option>
-        </select>
-      </div>
-      <div class="setting-row">
-        <div><strong>Show Timer</strong><p>Display the timer during gameplay.</p></div>
-        <button class="toggle on" id="showTimer" onclick="toggleSetting('showTimer')"></button>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-label">DATA & PRIVACY</div>
-      <div class="setting-row">
-        <div><strong>Automatic Save</strong><p>Your game is saved in this browser.</p></div>
-        <span style="color:var(--green);font-size:12px">● Enabled</span>
-      </div>
-      <div class="setting-row">
-        <div><strong>Reset Statistics</strong><p>Clear your recorded game history and scores.</p></div>
-        <button class="btn" onclick="resetStatistics()">Reset Progress</button>
-      </div>
-    </div>
-  </section>
+<section class="screen" id="progress">
+<div class="section-head"><div class="eyebrow">YOUR JOURNEY</div><h1>Player Progress.</h1><p>Every puzzle makes you sharper. Track your achievements here.</p></div>
+<div class="stats">
+<div class="stat"><strong id="progPlayed">0</strong><span>GAMES PLAYED</span></div>
+<div class="stat"><strong id="progWon">0</strong><span>GAMES WON</span></div>
+<div class="stat"><strong id="progRate">0%</strong><span>WIN RATE</span></div>
+<div class="stat"><strong id="progBest">--:--</strong><span>BEST TIME</span></div>
+</div>
+<div class="grid" style="margin-top:18px">
+<div class="card">
+<div class="card-label">COMPLETION RATE</div>
+<h2 id="progressRateText">0% Completed</h2>
+<div class="progress-bar"><div id="progressBar"></div></div>
+<p>Percentage of started games that you successfully completed.</p>
+</div>
+<div class="card">
+<div class="card-label">PERSONAL RECORD</div>
+<h2 id="recordText">Your journey begins.</h2>
+<p id="recordDescription">Complete a puzzle to set your first record.</p>
+</div>
+</div>
+<div class="card" style="margin-top:18px;overflow-x:auto">
+<div class="card-label">GAME HISTORY</div>
+<h2 style="margin-top:8px">Recent Challenges</h2>
+<table class="history-table">
+<thead><tr><th>DATE</th><th>LEVEL</th><th>TIME</th><th>RESULT</th></tr></thead>
+<tbody id="historyBody"><tr><td colspan="4" class="empty">No games played yet.</td></tr></tbody>
+</table>
+</div>
+</section>
+
+<section class="screen" id="settings">
+<div class="section-head"><div class="eyebrow">MAKE IT YOURS</div><h1>Game Settings.</h1><p>Customize your Sudoku Royale experience.</p></div>
+<div class="card" style="margin-bottom:17px">
+<div class="card-label">GAMEPLAY PREFERENCES</div>
+<div class="setting-row">
+<div><strong>Default Difficulty</strong><p>Choose the level used when starting a new puzzle.</p></div>
+<select id="defaultDifficulty" onchange="changeSetting('difficulty',this.value)"></select>
+</div>
+<div class="setting-row">
+<div><strong>Mistake Limit</strong><p>How many incorrect entries are allowed?</p></div>
+<select id="mistakeLimit" onchange="changeSetting('mistakes',this.value)">
+<option value="3">3 Mistakes</option><option value="5">5 Mistakes</option><option value="0">Unlimited</option>
+</select>
+</div>
+<div class="setting-row">
+<div><strong>Auto-check Answers</strong><p>Highlight incorrect entries immediately.</p></div>
+<button class="toggle on" id="autoCheck" onclick="toggleSetting('autoCheck')"></button>
+</div>
+<div class="setting-row">
+<div><strong>Notes Assistance</strong><p>Show pencil marks in empty cells.</p></div>
+<button class="toggle on" id="noteAssist" onclick="toggleSetting('noteAssist')"></button>
+</div>
+<div class="setting-row">
+<div><strong>Enable Hints</strong><p>Allow hints during gameplay.</p></div>
+<button class="toggle on" id="hintsEnabled" onclick="toggleSetting('hintsEnabled')"></button>
+</div>
+</div>
+<div class="card" style="margin-bottom:17px">
+<div class="card-label">APPEARANCE & DISPLAY</div>
+<div class="setting-row">
+<div><strong>Theme</strong><p>Choose your preferred appearance.</p></div>
+<select id="themeSelect" onchange="changeSetting('theme',this.value)">
+<option value="dark">Dark Navy & Gold</option>
+<option value="light">Light Ivory & Gold</option>
+</select>
+</div>
+<div class="setting-row">
+<div><strong>Show Timer</strong><p>Display the timer during gameplay.</p></div>
+<button class="toggle on" id="showTimer" onclick="toggleSetting('showTimer')"></button>
+</div>
+</div>
+<div class="card">
+<div class="card-label">DATA & PRIVACY</div>
+<div class="setting-row">
+<div><strong>Automatic Save</strong><p>Your game is saved in this browser.</p></div>
+<span style="color:var(--green);font-size:12px">● Enabled</span>
+</div>
+<div class="setting-row">
+<div><strong>Reset Statistics</strong><p>Clear your recorded game history and scores.</p></div>
+<button class="btn" onclick="resetStatistics()">Reset Progress</button>
+</div>
+</div>
+</section>
 </main>
 </div>
 
 <div class="modal-bg" id="modal">
-  <div class="modal">
-    <div style="font-size:40px;color:var(--gold)">♛</div>
-    <h2 id="modalTitle">Royal Victory!</h2>
-    <p id="modalText"></p>
-    <button class="btn gold" onclick="closeModal()">Return to Dashboard</button>
-  </div>
+<div class="modal">
+<div style="font-size:40px;color:var(--gold)">♛</div>
+<h2 id="modalTitle">Royal Victory!</h2>
+<p id="modalText"></p>
+<button class="btn gold" onclick="closeModal()">Return to Dashboard</button>
+</div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -387,361 +369,399 @@ body.light .side-card{background:#fffdf8}
 const $=id=>document.getElementById(id);
 const LEVELS=['Beginner','Easy','Medium','Hard','Expert','Master'];
 const REMOVALS={Beginner:30,Easy:36,Medium:45,Hard:51,Expert:55,Master:59};
-const SAVE='royaleGame';
-const SETTINGS='royaleSettings';
-const STATS='royaleProgress';
+const SAVE='royaleGame',SETTINGS='royaleSettings',STATS='royaleProgress';
 
 let settings=JSON.parse(localStorage.getItem(SETTINGS)||'null')||{
-  difficulty:'Easy',mistakes:3,autoCheck:true,noteAssist:true,
-  hintsEnabled:true,theme:'dark',showTimer:true
+difficulty:'Easy',mistakes:3,autoCheck:true,noteAssist:true,
+hintsEnabled:true,theme:'dark',showTimer:true
 };
 let stats=JSON.parse(localStorage.getItem(STATS)||'null')||{
-  played:0,won:0,best:null,history:[]
+played:0,won:0,best:null,history:[]
 };
 let difficulty=settings.difficulty;
 let solution=[],original=[],board=[],selected=null;
 let notes={},history=[],mistakes=0,hints=3,seconds=0;
 let notesMode=false,gameActive=false,timerInterval=null;
 
-function saveSettings(){
-  localStorage.setItem(SETTINGS,JSON.stringify(settings));
-}
+function saveSettings(){localStorage.setItem(SETTINGS,JSON.stringify(settings))}
 function saveStats(){
-  localStorage.setItem(STATS,JSON.stringify(stats));
-  updateProgress();
+localStorage.setItem(STATS,JSON.stringify(stats));
+updateProgress();
 }
 function notify(message){
-  $('toast').textContent=message;
-  $('toast').style.display='block';
-  setTimeout(()=>$('toast').style.display='none',2200);
+$('toast').textContent=message;
+$('toast').style.display='block';
+setTimeout(()=>$('toast').style.display='none',2200);
 }
 function formatTime(t){
-  return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
+return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
 }
+
 function navigate(page){
-  if(page!=='play'&&gameActive)saveGame();
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  $(page).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
-  $('pageTitle').textContent={dashboard:'Dashboard',play:'Play Sudoku',progress:'Progress',settings:'Settings'}[page];
-  if(page==='dashboard')updateDashboard();
-  if(page==='progress')updateProgress();
-  if(page==='settings')loadSettings();
-  if(page==='play')updatePlayMenu();
-  window.scrollTo({top:0,behavior:'smooth'});
+if(page!=='play'&&gameActive)saveGame();
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+$(page).classList.add('active');
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+$('pageTitle').textContent={dashboard:'Dashboard',play:'Play Sudoku',progress:'Progress',settings:'Settings'}[page];
+if(page==='dashboard')updateDashboard();
+if(page==='progress')updateProgress();
+if(page==='settings')loadSettings();
+if(page==='play')updatePlayMenu();
+window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
 
 function buildDifficultyButtons(){
-  ['quickDifficulties','playDifficulties'].forEach(id=>{
-    $(id).innerHTML='';
-    LEVELS.forEach(level=>{
-      const b=document.createElement('button');
-      b.className='diff-btn';
-      b.innerHTML=level+'<small>'+({Beginner:'Relaxed',Easy:'Casual',Medium:'Balanced',Hard:'Advanced',Expert:'Masterful',Master:'Extreme'}[level])+'</small>';
-      b.onclick=()=>{
-        difficulty=level;
-        document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));
-        document.querySelectorAll('.diff-btn').forEach(x=>{if(x.textContent.startsWith(level))x.classList.add('active')});
-      };
-      if(level===difficulty)b.classList.add('active');
-      $(id).appendChild(b);
-    });
-  });
+['quickDifficulties','playDifficulties'].forEach(id=>{
+$(id).innerHTML='';
+LEVELS.forEach(level=>{
+const b=document.createElement('button');
+b.className='diff-btn'+(level===difficulty?' active':'');
+b.innerHTML=level+'<small>'+({Beginner:'Relaxed',Easy:'Casual',Medium:'Balanced',Hard:'Advanced',Expert:'Masterful',Master:'Extreme'}[level])+'</small>';
+b.onclick=()=>{
+difficulty=level;
+document.querySelectorAll('.diff-btn').forEach(x=>{
+x.classList.toggle('active',x.textContent.startsWith(level));
+});
+};
+$(id).appendChild(b);
+});
+});
 }
+
 function loadSettings(){
-  $('defaultDifficulty').innerHTML=LEVELS.map(l=>'<option>'+l+'</option>').join('');
-  $('defaultDifficulty').value=settings.difficulty;
-  $('mistakeLimit').value=String(settings.mistakes);
-  $('themeSelect').value=settings.theme;
-  ['autoCheck','noteAssist','hintsEnabled','showTimer'].forEach(k=>{
-    $(k).classList.toggle('on',settings[k]);
-  });
+$('defaultDifficulty').innerHTML=LEVELS.map(l=>'<option>'+l+'</option>').join('');
+$('defaultDifficulty').value=settings.difficulty;
+$('mistakeLimit').value=String(settings.mistakes);
+$('themeSelect').value=settings.theme;
+['autoCheck','noteAssist','hintsEnabled','showTimer'].forEach(k=>{
+$(k).classList.toggle('on',settings[k]);
+});
 }
 function changeSetting(key,value){
-  settings[key]=key==='mistakes'?Number(value):value;
-  if(key==='difficulty')difficulty=value;
-  saveSettings();
-  document.body.classList.toggle('light',settings.theme==='light');
-  notify('Settings updated.');
+settings[key]=key==='mistakes'?Number(value):value;
+if(key==='difficulty')difficulty=value;
+saveSettings();
+document.body.classList.toggle('light',settings.theme==='light');
+notify('Settings updated.');
 }
 function toggleSetting(key){
-  settings[key]=!settings[key];
-  saveSettings();loadSettings();
-  if(key==='hintsEnabled')updateGameStats();
-  notify('Preference updated.');
+settings[key]=!settings[key];
+saveSettings();loadSettings();
+notify('Preference updated.');
 }
+
 function updateDashboard(){
-  $('homePlayed').textContent=stats.played;
-  $('homeWon').textContent=stats.won;
-  $('homeRate').textContent=stats.played?Math.round(stats.won/stats.played*100)+'%':'0%';
-  $('homeBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
-  const saved=localStorage.getItem(SAVE);
-  $('continueBtn').disabled=!saved;
-  $('continueBtn').textContent=saved?'Continue Game →':'No Saved Game';
-  $('dashContinueTitle').textContent=saved?'Your game is waiting.':'Ready for a challenge?';
-  $('dashContinueText').textContent=saved?'Resume your saved puzzle right where you left off.':'Choose a level and begin your royal journey.';
+$('homePlayed').textContent=stats.played;
+$('homeWon').textContent=stats.won;
+$('homeRate').textContent=stats.played?Math.round(stats.won/stats.played*100)+'%':'0%';
+$('homeBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
+const saved=localStorage.getItem(SAVE);
+$('continueBtn').disabled=!saved;
+$('continueBtn').textContent=saved?'Continue Game →':'No Saved Game';
+$('dashContinueTitle').textContent=saved?'Your game is waiting.':'Ready for a challenge?';
+$('dashContinueText').textContent=saved?'Resume your saved puzzle right where you left off.':'Choose a level and begin your royal journey.';
 }
 function updatePlayMenu(){
-  const saved=localStorage.getItem(SAVE);
-  $('savedTitle').textContent=saved?'A puzzle is waiting for you.':'No active puzzle';
-  $('savedDescription').textContent=saved?'Your '+JSON.parse(saved).difficulty+' puzzle is saved.':'Start a new challenge to begin your journey.';
-  $('savedContinue').disabled=!saved;
-  $('playMenu').style.display='block';
-  $('gameArea').style.display='none';
-  buildDifficultyButtons();
+const saved=localStorage.getItem(SAVE);
+$('savedTitle').textContent=saved?'A puzzle is waiting for you.':'No active puzzle';
+$('savedDescription').textContent=saved?'Your '+JSON.parse(saved).difficulty+' puzzle is saved.':'Start a new challenge to begin your journey.';
+$('savedContinue').disabled=!saved;
+$('playMenu').style.display='block';
+$('gameArea').style.display='none';
+buildDifficultyButtons();
 }
 function updateProgress(){
-  const rate=stats.played?Math.round(stats.won/stats.played*100):0;
-  ['progPlayed','homePlayed'].forEach(id=>$(id).textContent=stats.played);
-  $('progWon').textContent=stats.won;
-  $('progRate').textContent=rate+'%';
-  $('progBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
-  $('progressRateText').textContent=rate+'% Completed';
-  $('progressBar').style.width=rate+'%';
-  $('recordText').textContent=stats.best===null?'Your journey begins.':formatTime(stats.best);
-  $('recordDescription').textContent=stats.best===null?'Complete a puzzle to set your first record.':'Your fastest completed puzzle.';
-  $('historyBody').innerHTML=stats.history.length?stats.history.slice(0,12).map(g=>
-    '<tr><td>'+g.date+'</td><td>'+g.level+'</td><td>'+formatTime(g.time)+'</td><td style="color:'+(g.won?'var(--green)':'var(--red)')+'">'+(g.won?'Victory':'Unfinished')+'</td></tr>'
-  ).join(''):'<tr><td colspan="4" class="empty">No games played yet.</td></tr>';
-  $('homeWon').textContent=stats.won;
-  $('homeRate').textContent=rate+'%';
-  $('homeBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
+const rate=stats.played?Math.round(stats.won/stats.played*100):0;
+$('progPlayed').textContent=stats.played;
+$('progWon').textContent=stats.won;
+$('progRate').textContent=rate+'%';
+$('progBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
+$('progressRateText').textContent=rate+'% Completed';
+$('progressBar').style.width=rate+'%';
+$('recordText').textContent=stats.best===null?'Your journey begins.':formatTime(stats.best);
+$('recordDescription').textContent=stats.best===null?'Complete a puzzle to set your first record.':'Your fastest completed puzzle.';
+$('historyBody').innerHTML=stats.history.length?stats.history.slice(0,12).map(g=>
+'<tr><td>'+g.date+'</td><td>'+g.level+'</td><td>'+formatTime(g.time)+'</td><td style="color:'+(g.won?'var(--green)':'var(--red)')+'">'+(g.won?'Victory':'Unfinished')+'</td></tr>'
+).join(''):'<tr><td colspan="4" class="empty">No games played yet.</td></tr>';
+$('homePlayed').textContent=stats.played;
+$('homeWon').textContent=stats.won;
+$('homeRate').textContent=rate+'%';
+$('homeBest').textContent=stats.best===null?'--:--':formatTime(stats.best);
 }
 
 function shuffle(a){
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];
-  }
-  return a;
+for(let i=a.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1));
+[a[i],a[j]]=[a[j],a[i]];
+}
+return a;
 }
 function valid(g,r,c,n){
-  for(let i=0;i<9;i++)if(g[r][i]===n||g[i][c]===n)return false;
-  let br=Math.floor(r/3)*3,bc=Math.floor(c/3)*3;
-  for(let i=br;i<br+3;i++)for(let j=bc;j<bc+3;j++)if(g[i][j]===n)return false;
-  return true;
+for(let i=0;i<9;i++)if(g[r][i]===n||g[i][c]===n)return false;
+let br=Math.floor(r/3)*3,bc=Math.floor(c/3)*3;
+for(let i=br;i<br+3;i++)for(let j=bc;j<bc+3;j++)if(g[i][j]===n)return false;
+return true;
 }
 function fillGrid(g){
-  for(let r=0;r<9;r++)for(let c=0;c<9;c++)if(!g[r][c]){
-    for(const n of shuffle([1,2,3,4,5,6,7,8,9])){
-      if(valid(g,r,c,n)){g[r][c]=n;if(fillGrid(g))return true;g[r][c]=0;}
-    }
-    return false;
-  }
-  return true;
+for(let r=0;r<9;r++)for(let c=0;c<9;c++)if(!g[r][c]){
+for(const n of shuffle([1,2,3,4,5,6,7,8,9])){
+if(valid(g,r,c,n)){
+g[r][c]=n;
+if(fillGrid(g))return true;
+g[r][c]=0;
+}
+}
+return false;
+}
+return true;
 }
 function makePuzzle(){
-  const g=Array.from({length:9},()=>Array(9).fill(0));
-  fillGrid(g);
-  solution=g.map(row=>[...row]);
-  original=g.map(row=>[...row]);
-  const positions=shuffle(Array.from({length:81},(_,i)=>i));
-  for(let i=0;i<REMOVALS[difficulty];i++){
-    const p=positions[i];original[Math.floor(p/9)][p%9]=0;
-  }
-  board=original.map(row=>[...row]);
+const g=Array.from({length:9},()=>Array(9).fill(0));
+fillGrid(g);
+solution=g.map(row=>[...row]);
+original=g.map(row=>[...row]);
+const positions=shuffle(Array.from({length:81},(_,i)=>i));
+for(let i=0;i<REMOVALS[difficulty];i++){
+const p=positions[i];
+original[Math.floor(p/9)][p%9]=0;
 }
+board=original.map(row=>[...row]);
+}
+
+/* FIXED: Start Playing now opens the Play screen and displays the board. */
 function startNewGame(){
-  difficulty=difficulty||settings.difficulty;
-  clearInterval(timerInterval);
-  makePuzzle();
-  selected=null;notes={};history=[];mistakes=0;hints=3;seconds=0;
-  notesMode=false;gameActive=true;
-  stats.played++;saveStats();
-  openGame();
-  saveGame();
+clearInterval(timerInterval);
+if(!LEVELS.includes(difficulty))difficulty=settings.difficulty;
+makePuzzle();
+selected=null;notes={};history=[];mistakes=0;hints=3;seconds=0;
+notesMode=false;gameActive=true;
+stats.played++;
+saveStats();
+navigate('play');
+openGame();
+saveGame();
 }
+
+/* FIXED: Daily Challenge starts a Medium puzzle and opens the game. */
 function dailyChallenge(){
-  difficulty='Medium';
-  startNewGame();
+difficulty='Medium';
+startNewGame();
+$('gameMessage').textContent='Daily Challenge started! Good luck!';
 }
+
 function openGame(){
-  $('playMenu').style.display='none';
-  $('gameArea').style.display='block';
-  $('gameLevel').textContent=difficulty+' Sudoku';
-  $('notesBtn').textContent='✎ Notes OFF';
-  $('notesBtn').classList.remove('active');
-  $('timer').parentElement.style.display=settings.showTimer?'block':'none';
-  renderBoard();renderNumbers();updateGameStats();
-  $('gameMessage').textContent='Select a cell to begin.';
-  startTimer();
+$('playMenu').style.display='none';
+$('gameArea').style.display='block';
+$('gameLevel').textContent=difficulty+' Sudoku';
+$('notesBtn').textContent='✎ Notes OFF';
+$('notesBtn').classList.remove('active');
+$('timer').parentElement.style.display=settings.showTimer?'block':'none';
+renderBoard();renderNumbers();updateGameStats();
+$('gameMessage').textContent='Select a cell to begin.';
+startTimer();
 }
 function startTimer(){
-  clearInterval(timerInterval);
-  timerInterval=setInterval(()=>{
-    if(gameActive){seconds++;updateGameStats();saveGame();}
-  },1000);
+clearInterval(timerInterval);
+timerInterval=setInterval(()=>{
+if(gameActive){seconds++;updateGameStats();saveGame();}
+},1000);
 }
 function updateGameStats(){
-  $('timer').textContent=formatTime(seconds);
-  $('mistakes').textContent=mistakes+' / '+(settings.mistakes||'∞');
-  $('hintCount').textContent=settings.hintsEnabled?hints:'OFF';
+$('timer').textContent=formatTime(seconds);
+$('mistakes').textContent=mistakes+' / '+(settings.mistakes||'∞');
+$('hintCount').textContent=settings.hintsEnabled?hints:'OFF';
 }
 function renderBoard(){
-  const el=$('board');el.innerHTML='';
-  for(let r=0;r<9;r++)for(let c=0;c<9;c++){
-    const value=board[r][c],cell=document.createElement('button');
-    cell.className='cell';
-    if(original[r][c])cell.classList.add('given');
-    if(r===2||r===5)cell.classList.add('box-bottom');
-    if(selected){
-      const [sr,sc]=selected;
-      if(sr===r||sc===c||(Math.floor(sr/3)===Math.floor(r/3)&&Math.floor(sc/3)===Math.floor(c/3)))cell.classList.add('related');
-      if(sr===r&&sc===c)cell.classList.add('selected');
-      if(value&&value===board[sr][sc])cell.classList.add('same');
-    }
-    if(value)cell.textContent=value;
-    else if(notes[r*9+c]?.size&&settings.noteAssist){
-      const ng=document.createElement('div');ng.className='notes-grid';
-      for(let n=1;n<=9;n++){const s=document.createElement('span');s.textContent=notes[r*9+c].has(n)?n:'';ng.appendChild(s);}
-      cell.appendChild(ng);
-    }
-    cell.onclick=()=>selectCell(r,c);
-    el.appendChild(cell);
-  }
+const el=$('board');el.innerHTML='';
+for(let r=0;r<9;r++)for(let c=0;c<9;c++){
+const value=board[r][c],cell=document.createElement('button');
+cell.className='cell';
+if(original[r][c])cell.classList.add('given');
+if(r===2||r===5)cell.classList.add('box-bottom');
+if(selected){
+const [sr,sc]=selected;
+if(sr===r||sc===c||(Math.floor(sr/3)===Math.floor(r/3)&&Math.floor(sc/3)===Math.floor(c/3)))cell.classList.add('related');
+if(sr===r&&sc===c)cell.classList.add('selected');
+if(value&&value===board[sr][sc])cell.classList.add('same');
+}
+if(value)cell.textContent=value;
+else if(notes[r*9+c]?.size&&settings.noteAssist){
+const ng=document.createElement('div');ng.className='notes-grid';
+for(let n=1;n<=9;n++){
+const s=document.createElement('span');
+s.textContent=notes[r*9+c].has(n)?n:'';
+ng.appendChild(s);
+}
+cell.appendChild(ng);
+}
+cell.onclick=()=>selectCell(r,c);
+el.appendChild(cell);
+}
 }
 function renderNumbers(){
-  $('numberPad').innerHTML='';
-  for(let n=1;n<=9;n++){
-    const b=document.createElement('button');b.className='num-btn';b.textContent=n;
-    b.onclick=()=>enterNumber(n);$('numberPad').appendChild(b);
-  }
+$('numberPad').innerHTML='';
+for(let n=1;n<=9;n++){
+const b=document.createElement('button');
+b.className='num-btn';b.textContent=n;
+b.onclick=()=>enterNumber(n);
+$('numberPad').appendChild(b);
 }
-function selectCell(r,c){selected=[r,c];renderBoard();$('gameMessage').textContent=original[r][c]?'Fixed number.':`Row ${r+1}, column ${c+1}.`;}
+}
+function selectCell(r,c){
+selected=[r,c];renderBoard();
+$('gameMessage').textContent=original[r][c]?'Fixed number.':`Row ${r+1}, column ${c+1}.`;
+}
 function enterNumber(n){
-  if(!gameActive||!selected){$('gameMessage').textContent='Select a cell first.';return;}
-  const [r,c]=selected,key=r*9+c;
-  if(original[r][c]){notify('That number is fixed.');return;}
-  if(notesMode){
-    if(!notes[key])notes[key]=new Set();
-    notes[key].has(n)?notes[key].delete(n):notes[key].add(n);
-    renderBoard();saveGame();return;
-  }
-  if(board[r][c]===n)return;
-  history.push({r,c,old:board[r][c]});
-  board[r][c]=n;delete notes[key];
-  const wrong=n!==solution[r][c];
-  if(wrong&&settings.autoCheck){
-    mistakes++;
-    $('gameMessage').textContent='Incorrect entry. Try again!';
-    $('gameMessage').style.color='var(--red)';
-  }else{
-    $('gameMessage').textContent='Number entered.';
-    $('gameMessage').style.color='var(--green)';
-  }
-  updateGameStats();renderBoard();saveGame();
-  if(settings.mistakes&&mistakes>=settings.mistakes){finishGame(false,'You reached the mistake limit. Try another puzzle!');return;}
-  if(isSolved())finishGame(true,'You conquered the grid in '+formatTime(seconds)+'!');
+if(!gameActive||!selected){
+$('gameMessage').textContent='Select a cell first.';
+return;
+}
+const [r,c]=selected,key=r*9+c;
+if(original[r][c]){notify('That number is fixed.');return;}
+if(notesMode){
+if(!notes[key])notes[key]=new Set();
+notes[key].has(n)?notes[key].delete(n):notes[key].add(n);
+renderBoard();saveGame();return;
+}
+if(board[r][c]===n)return;
+history.push({r,c,old:board[r][c]});
+board[r][c]=n;delete notes[key];
+const wrong=n!==solution[r][c];
+if(wrong&&settings.autoCheck){
+mistakes++;
+$('gameMessage').textContent='Incorrect entry. Try again!';
+$('gameMessage').style.color='var(--red)';
+}else{
+$('gameMessage').textContent='Number entered.';
+$('gameMessage').style.color='var(--green)';
+}
+updateGameStats();renderBoard();saveGame();
+if(settings.mistakes&&mistakes>=settings.mistakes){
+finishGame(false,'You reached the mistake limit. Try another puzzle!');
+return;
+}
+if(isSolved())finishGame(true,'You conquered the grid in '+formatTime(seconds)+'!');
 }
 function toggleNotes(){
-  notesMode=!notesMode;
-  $('notesBtn').textContent=notesMode?'✎ Notes ON':'✎ Notes OFF';
-  $('notesBtn').classList.toggle('active',notesMode);
-  $('gameMessage').textContent=notesMode?'Pencil mode enabled.':'Pencil mode disabled.';
+notesMode=!notesMode;
+$('notesBtn').textContent=notesMode?'✎ Notes ON':'✎ Notes OFF';
+$('notesBtn').classList.toggle('active',notesMode);
+$('gameMessage').textContent=notesMode?'Pencil mode enabled.':'Pencil mode disabled.';
 }
 function eraseCell(){
-  if(!selected)return;
-  const [r,c]=selected;
-  if(original[r][c])return;
-  history.push({r,c,old:board[r][c]});board[r][c]=0;
-  delete notes[r*9+c];renderBoard();saveGame();
+if(!selected)return;
+const [r,c]=selected;
+if(original[r][c])return;
+history.push({r,c,old:board[r][c]});
+board[r][c]=0;delete notes[r*9+c];
+renderBoard();saveGame();
 }
 function useHint(){
-  if(!settings.hintsEnabled){notify('Hints are disabled in Settings.');return;}
-  if(!selected||hints<=0){notify('Select an empty cell and check your hints.');return;}
-  const [r,c]=selected;
-  if(original[r][c]||board[r][c]){notify('Select an empty cell.');return;}
-  history.push({r,c,old:0});board[r][c]=solution[r][c];hints--;
-  updateGameStats();renderBoard();saveGame();
-  if(isSolved())finishGame(true,'You conquered the grid!');
+if(!settings.hintsEnabled){notify('Hints are disabled in Settings.');return;}
+if(!selected||hints<=0){notify('Select an empty cell and check your hints.');return;}
+const [r,c]=selected;
+if(original[r][c]||board[r][c]){notify('Select an empty cell.');return;}
+history.push({r,c,old:0});
+board[r][c]=solution[r][c];hints--;
+updateGameStats();renderBoard();saveGame();
+if(isSolved())finishGame(true,'You conquered the grid!');
 }
 function undoMove(){
-  if(!history.length){notify('Nothing to undo.');return;}
-  const m=history.pop();board[m.r][m.c]=m.old;
-  selected=[m.r,m.c];renderBoard();saveGame();
+if(!history.length){notify('Nothing to undo.');return;}
+const m=history.pop();
+board[m.r][m.c]=m.old;
+selected=[m.r,m.c];
+renderBoard();saveGame();
 }
 function checkBoard(){
-  let wrong=0,empty=0;
-  for(let r=0;r<9;r++)for(let c=0;c<9;c++){
-    if(!board[r][c])empty++;
-    else if(board[r][c]!==solution[r][c])wrong++;
-  }
-  $('gameMessage').textContent=wrong+' incorrect entries · '+empty+' empty cells.';
-  $('gameMessage').style.color=wrong?'var(--red)':'var(--green)';
+let wrong=0,empty=0;
+for(let r=0;r<9;r++)for(let c=0;c<9;c++){
+if(!board[r][c])empty++;
+else if(board[r][c]!==solution[r][c])wrong++;
+}
+$('gameMessage').textContent=wrong+' incorrect entries · '+empty+' empty cells.';
+$('gameMessage').style.color=wrong?'var(--red)':'var(--green)';
 }
 function isSolved(){
-  return board.every((row,r)=>row.every((n,c)=>n===solution[r][c]));
+return board.every((row,r)=>row.every((n,c)=>n===solution[r][c]));
 }
 function saveGame(){
-  if(!gameActive)return;
-  localStorage.setItem(SAVE,JSON.stringify({
-    solution,original,board,difficulty,seconds,mistakes,hints,history,
-    notes:Object.fromEntries(Object.entries(notes).map(([k,v])=>[k,[...v]]))
-  }));
-  updateDashboard();
+if(!gameActive)return;
+localStorage.setItem(SAVE,JSON.stringify({
+solution,original,board,difficulty,seconds,mistakes,hints,history,
+notes:Object.fromEntries(Object.entries(notes).map(([k,v])=>[k,[...v]]))
+}));
+updateDashboard();
 }
 function continueGame(){
-  try{
-    const d=JSON.parse(localStorage.getItem(SAVE));
-    if(!d)return;
-    solution=d.solution;original=d.original;board=d.board;
-    difficulty=d.difficulty;seconds=d.seconds;mistakes=d.mistakes;
-    hints=d.hints;history=d.history||[];
-    notes=Object.fromEntries(Object.entries(d.notes||{}).map(([k,v])=>[k,new Set(v)]));
-    selected=null;notesMode=false;gameActive=true;
-    navigate('play');openGame();
-  }catch(e){notify('Unable to load saved game.');}
+try{
+const d=JSON.parse(localStorage.getItem(SAVE));
+if(!d){notify('No saved game found.');return;}
+solution=d.solution;original=d.original;board=d.board;
+difficulty=d.difficulty;seconds=d.seconds;mistakes=d.mistakes;
+hints=d.hints;history=d.history||[];
+notes=Object.fromEntries(Object.entries(d.notes||{}).map(([k,v])=>[k,new Set(v)]));
+selected=null;notesMode=false;gameActive=true;
+navigate('play');
+openGame();
+}catch(e){notify('Unable to load saved game.');}
 }
 function finishGame(won,message){
-  gameActive=false;clearInterval(timerInterval);
-  stats.history.unshift({
-    date:new Date().toLocaleDateString(),
-    level:difficulty,time:seconds,won
-  });
-  if(stats.history.length>30)stats.history.pop();
-  if(won){
-    stats.won++;
-    if(stats.best===null||seconds<stats.best)stats.best=seconds;
-    localStorage.removeItem(SAVE);
-  }else saveGame();
-  saveStats();
-  $('modalTitle').textContent=won?'Royal Victory!':'Challenge Ended';
-  $('modalText').textContent=message;
-  $('modal').style.display='flex';
+gameActive=false;clearInterval(timerInterval);
+stats.history.unshift({
+date:new Date().toLocaleDateString(),
+level:difficulty,time:seconds,won
+});
+if(stats.history.length>30)stats.history.pop();
+if(won){
+stats.won++;
+if(stats.best===null||seconds<stats.best)stats.best=seconds;
+localStorage.removeItem(SAVE);
+}else{
+localStorage.removeItem(SAVE);
+}
+saveStats();
+$('modalTitle').textContent=won?'Royal Victory!':'Challenge Ended';
+$('modalText').textContent=message;
+$('modal').style.display='flex';
 }
 function closeModal(){
-  $('modal').style.display='none';
-  navigate('dashboard');
+$('modal').style.display='none';
+navigate('dashboard');
 }
 function restartGame(){
-  if(!confirm('Restart this puzzle?'))return;
-  board=original.map(row=>[...row]);
-  mistakes=0;hints=3;seconds=0;history=[];notes={};selected=null;
-  gameActive=true;updateGameStats();renderBoard();startTimer();saveGame();
-  $('gameMessage').textContent='Puzzle restarted.';
+if(!confirm('Restart this puzzle?'))return;
+board=original.map(row=>[...row]);
+mistakes=0;hints=3;seconds=0;history=[];notes={};selected=null;
+gameActive=true;updateGameStats();renderBoard();startTimer();saveGame();
+$('gameMessage').textContent='Puzzle restarted.';
 }
 function backToPlay(){
-  saveGame();clearInterval(timerInterval);
-  gameActive=false;navigate('play');
+saveGame();clearInterval(timerInterval);
+gameActive=false;
+navigate('play');
 }
 function resetStatistics(){
-  if(!confirm('Clear all your game statistics and history?'))return;
-  stats={played:0,won:0,best:null,history:[]};
-  saveStats();notify('Progress has been reset.');
+if(!confirm('Clear all your game statistics and history?'))return;
+stats={played:0,won:0,best:null,history:[]};
+saveStats();notify('Progress has been reset.');
 }
+
 document.addEventListener('keydown',e=>{
-  if(!gameActive)return;
-  if(e.key>='1'&&e.key<='9')enterNumber(Number(e.key));
-  if(e.key==='Backspace'||e.key==='Delete')eraseCell();
-  if(e.key.toLowerCase()==='n')toggleNotes();
-  if(selected){
-    const [r,c]=selected;
-    if(e.key==='ArrowUp')selectCell(Math.max(0,r-1),c);
-    if(e.key==='ArrowDown')selectCell(Math.min(8,r+1),c);
-    if(e.key==='ArrowLeft')selectCell(r,Math.max(0,c-1));
-    if(e.key==='ArrowRight')selectCell(r,Math.min(8,c+1));
-  }
+if(!gameActive)return;
+if(e.key>='1'&&e.key<='9')enterNumber(Number(e.key));
+if(e.key==='Backspace'||e.key==='Delete')eraseCell();
+if(e.key.toLowerCase()==='n')toggleNotes();
+if(selected){
+const [r,c]=selected;
+if(e.key==='ArrowUp')selectCell(Math.max(0,r-1),c);
+if(e.key==='ArrowDown')selectCell(Math.min(8,r+1),c);
+if(e.key==='ArrowLeft')selectCell(r,Math.max(0,c-1));
+if(e.key==='ArrowRight')selectCell(r,Math.min(8,c+1));
+}
 });
+
 document.body.classList.toggle('light',settings.theme==='light');
 buildDifficultyButtons();
 loadSettings();
